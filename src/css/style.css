@@ -1,0 +1,60 @@
+body {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+    display: inline-block;
+    width: 60%;
+}
+
+.ImageList {
+    display: inline-block;
+    vertical-align: middle;
+    float: left;
+    width: 40%;
+}
+
+.Display {
+    display: inline-block;
+    width: 50%;
+    height: 90vh;
+}
+
+.Display img {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.image {
+    height: 80px;
+    width: 30px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.thumbnail {
+    display: block;
+}
+
+li {
+    height: 70px;
+}
+
+.thumbnail img {
+    display: inline-block;
+    object-fit: cover;
+    padding: 5px;
+    height: 50px;
+    width: 50px;
+    float: left;
+}
+
+.thumbnail p {
+    vertical-align: auto;
+}
