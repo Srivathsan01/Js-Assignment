@@ -26,17 +26,18 @@ function resetColour() {
     }
 }
 
-function displayImage(event) {
+function displayImage(listele) {
 
     // Restting the Background Colours
-
+    console.log(listele)
+    
     resetColour();
 
     // Applying Blue Background to the selected element
-    event.target.style.backgroundColor = "blue ";
+    listele.style.backgroundColor = "blue ";
 
     // Getting the details of the current image 
-    image_Id = event.target.id
+    image_Id = listele.id
     currentSelected = image_Id
         // Changing the Displayed Image
 
@@ -83,5 +84,5 @@ var thumbnails = document.querySelectorAll(".thumbnail ")
 totalthumbnails = thumbnails.length
 
 for (var i = 0; i < totalthumbnails; i++) {
-    thumbnails[i].addEventListener('click', displayImage, false);
+    thumbnails[i].addEventListener('click', function(){displayImage(this)}, false);
 }
