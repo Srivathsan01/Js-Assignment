@@ -1,30 +1,22 @@
-var ImageUrls = [
-    "https://images.unsplash.com/photo-1561948955-570b270e7c36?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80 ",
-    "https://images.unsplash.com/photo-1606787620819-8bdf0c44c293?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80 ",
-    "https://images.unsplash.com/photo-1539367628448-4bc5c9d171c8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80 ",
-    "https://images.unsplash.com/photo-1623206837956-07dab21608f6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80 ",
-    "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80 "
-]
+import imageData from './imagedata.js'
+console.log(imageData)
 
-var ImageNames = [
-    "cat.jpeg",
-    "cooking couple shoot portofilio(1).jpg",
-    "bali-kelingking-beach-plastic-removal-drive.key",
-    "NextByk Investor Pitch 2021.ppt",
-    "interns-performance-report-june-2021.key"
+// Declaring Global Variables
 
-]
+var ImageList = document.querySelector(".ImageList")
+var Display = document.querySelector(".Display")
 var currentSelected = 0
-var totalImages = 5
-
+var totalImages = imageData.length
+    
 function resetColour() {
-    var thumbnails = document.querySelectorAll(".thumbnail ")
+    var thumbnails = document.querySelectorAll(".thumbnail")
     totalthumbnails = thumbnails.length
 
     for (var i = 0; i < totalthumbnails; i++) {
         thumbnails[i].style.backgroundColor = "white "
     }
 }
+
 
 function displayImage(listele) {
 
@@ -37,52 +29,96 @@ function displayImage(listele) {
     listele.style.backgroundColor = "blue ";
 
     // Getting the details of the current image 
-    image_Id = listele.id
+    let image_Id = listele.id
     currentSelected = image_Id
-        // Changing the Displayed Image
+    
+    // Changing the Displayed Image
 
-    currentImageSource = ImageUrls[image_Id]
-    ImageDisplay = document.getElementById("Disp")
+    let currentImageSource = listele.getElementsByTagName('img')[0].currentSrc
+    var ImageDisplay = document.getElementById("Disp")
 
     // Changing Captions
-    captionText = document.getElementById("CaptionText")
+    let captionText = document.getElementById("CaptionText")
     ImageDisplay.src = currentImageSource;
-    newCaption = ImageNames[currentSelected]
+    let newCaption = listele.getElementsByTagName('p')[0].innerHTML
     captionText.innerHTML = newCaption
         // event.stopPropogation()
+} 
+
+function createList(item, index) {
+    
+    // Main list 
+    let listElement = document.createElement('li')
+    listElement.classList.add("thumbnail")
+    listElement.setAttribute('id',index)
+    // Adding image and Caption
+    let image = document.createElement("img")
+    image.src = item["previewImage"]
+    let caption = document.createElement("p")
+    caption.innerHTML = item["title"]
+    
+    
+    listElement.appendChild(image)
+    listElement.appendChild(caption)
+    
+    // Event Listener for Clicking
+    
+    var thumbnailList = document.querySelector('.ThumbList')
+    thumbnailList.appendChild(listElement)
+
 }
+// Creating a list 
+var thumbnailList = document.createElement('ul')
+thumbnailList.classList.add("ThumbList")
 
-window.addEventListener("keydown", function(event) {
-    const pressedKey = event.key;
-    if (pressedKey == "ArrowUp") {
-        currentSelected = (currentSelected - 1 + totalImages) % totalImages;
-    }
-
-    if (pressedKey == "ArrowDown") {
-        currentSelected = (currentSelected + 1) % totalImages;
-    }
-
-    // Reset Colour
-    resetColour()
-    thumbnail = document.getElementById(currentSelected)
-    thumbnail.style.backgroundColor = "blue"
-
-    // Change Background Colour of the Thumbnail pressed 
-    ImageDisplay = document.getElementById("Disp")
-    currentImageSource = ImageUrls[currentSelected]
-    ImageDisplay.src = currentImageSource;
-
-    // Changing Captions
-    captionText = document.getElementById("CaptionText")
-    ImageDisplay.src = currentImageSource;
-    newCaption = ImageNames[currentSelected]
-    captionText.innerHTML = newCaption
-
+// Adding data to the list
+ImageList.appendChild(thumbnailList)
+imageData.forEach((item,index) => {
+    createList(item,index)
 })
 
-var thumbnails = document.querySelectorAll(".thumbnail ")
-totalthumbnails = thumbnails.length
 
+var thumbnails = document.querySelectorAll(".thumbnail ")
+var totalthumbnails = thumbnails.length
+
+// Adding Event Listeners for Click
 for (var i = 0; i < totalthumbnails; i++) {
     thumbnails[i].addEventListener('click', function(){displayImage(this)}, false);
 }
+
+// Adding Event Listener for Arrow Keys 
+
+window.addEventListener("keydown", function(event) {
+    const pressedKey = event.key;
+    // Arrow Up
+    if (pressedKey == "ArrowUp") {
+        currentSelected = (currentSelected - 1 + totalImages) % totalImages;
+    }
+    // Arrow Down
+
+    else if (pressedKey == "ArrowDown") {
+        currentSelected = (currentSelected + 1) % totalImages;
+    }
+
+    // Ignore if Any other key is pressed 
+    else {
+        return;
+    }
+    // Reset Colour
+    resetColour()
+    let  thumbnail = document.getElementById(currentSelected)
+    console.log("Errror " ,thumbnail)
+    thumbnail.style.backgroundColor = "blue"
+
+    // Change Background Colour of the Thumbnail pressed 
+    let ImageDisplay = document.getElementById("Disp")
+    let currentImageSource = thumbnail.getElementsByTagName('img')[0].currentSrc
+    ImageDisplay.src = currentImageSource;
+
+    // Changing Captions
+    let captionText = document.getElementById("CaptionText")
+    ImageDisplay.src = currentImageSource;
+    let newCaption =  thumbnail.getElementsByTagName('p')[0].innerHTML
+    captionText.innerHTML = newCaption
+
+})
