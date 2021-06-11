@@ -1,5 +1,4 @@
 import imageData from './imagedata.js'
-console.log(imageData)
 
 // Declaring Global Variables
 
@@ -14,6 +13,7 @@ function resetColour() {
 
     for (var i = 0; i < totalthumbnails; i++) {
         thumbnails[i].style.backgroundColor = "white "
+        thumbnails[i].getElementsByTagName('p')[0].style.color = 'black'
     }
 }
 
@@ -41,6 +41,7 @@ function displayImage(listele) {
     let captionText = document.getElementById("CaptionText")
     ImageDisplay.src = currentImageSource;
     let newCaption = listele.getElementsByTagName('p')[0].innerHTML
+    listele.getElementsByTagName('p')[0].style.color="white";
     captionText.innerHTML = newCaption
         // event.stopPropogation()
 } 
@@ -109,7 +110,7 @@ window.addEventListener("keydown", function(event) {
     let  thumbnail = document.getElementById(currentSelected)
     console.log("Errror " ,thumbnail)
     thumbnail.style.backgroundColor = "blue"
-
+    thumbnail.getElementsByTagName('p')[0].style.color="white";
     // Change Background Colour of the Thumbnail pressed 
     let ImageDisplay = document.getElementById("Disp")
     let currentImageSource = thumbnail.getElementsByTagName('img')[0].currentSrc

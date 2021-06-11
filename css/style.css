@@ -5,23 +5,29 @@ body {
 
 .container {
     display: inline-block;
-    width: 60%;
+    width: 50%;
 }
 
 .ImageList {
     display: inline-block;
     float: left;
-    width: 45%;
+    width: 40%;
+}
+
+.ImageList p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .Display {
     display: inline-block;
-    width: 50%;
+    width: 55%;
     height: 90vh;
 }
 
 .Display img {
-    display: inline-block;
+    display: block;
     object-fit: cover;
     border-radius: 10px;
     width: 100%;
@@ -29,34 +35,32 @@ body {
     
 }
 
-.image {
-    height: 80px;
-    width: 30px;
-}
-
 ul {
     list-style-type: none;
 }
 
-.thumbnail {
-    display: block;
-}
 
 li {
-    height: 70px;
+    margin: 8px;
+    padding: 5px;
     border-radius: 6px;
     text-align: left;
 }
 
-p{
-    display: inline-block;
-}
 .thumbnail img {
     display: inline-block;
     object-fit: cover;
-    padding: 5px;
+    padding: 2px;
     height: 50px;
     width: 50px;
     float: left;
+    border-radius: 4px;
+
+}
+
+.CaptionText {
+    overflow: hidden;
+    text-overflow: string;
+    white-space: nowrap;
 }
 
