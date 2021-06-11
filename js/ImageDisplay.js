@@ -17,6 +17,19 @@ function resetColour() {
     }
 }
 
+var truncateTitle = function(value, maxChars, trailingCharCount) {
+    var result = value;
+
+    if(value.length > maxChars){
+        var front = value.substr(0, 15);
+        var mid = "...";
+        var end = value.substr(-trailingCharCount);
+
+        result = front + mid + end;
+    }
+    return result;
+}
+
 
 function displayImage(listele) {
 
@@ -56,9 +69,11 @@ function createList(item, index) {
     let image = document.createElement("img")
     image.src = item["previewImage"]
     let caption = document.createElement("p")
-    caption.innerHTML = item["title"]
-    
-    
+    // caption.innerHTML = item["title"]
+    let finalText = item["title"].slice(-13)
+    caption.setAttribute('data-extension' , finalText)
+    caption.innerHTML = truncateTitle(item["title"] , 31 , 13)
+
     listElement.appendChild(image)
     listElement.appendChild(caption)
     
@@ -66,7 +81,6 @@ function createList(item, index) {
     
     var thumbnailList = document.querySelector('.ThumbList')
     thumbnailList.appendChild(listElement)
-
 }
 // Creating a list 
 var thumbnailList = document.createElement('ul')

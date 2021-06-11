@@ -5,24 +5,26 @@ body {
 
 .container {
     display: inline-block;
-    width: 50%;
+    width: 45%;
 }
 
 .ImageList {
     display: inline-block;
     float: left;
-    width: 40%;
+    width: 43%;
 }
 
 .ImageList p {
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 17px;
+    /* text-overflow: ellipsis; */
 }
+
 
 .Display {
     display: inline-block;
-    width: 55%;
+    width: 50%;
     height: 90vh;
 }
 
@@ -47,6 +49,7 @@ li {
     text-align: left;
 }
 
+
 .thumbnail img {
     display: inline-block;
     object-fit: cover;
@@ -60,7 +63,7 @@ li {
 
 .CaptionText {
     overflow: hidden;
-    text-overflow: string;
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
 
