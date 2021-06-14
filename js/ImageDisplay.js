@@ -17,20 +17,6 @@ function resetColour() {
     }
 }
 
-var truncateTitle = function(value, maxChars, trailingCharCount) {
-    var result = value;
-
-    if(value.length > maxChars){
-        var front = value.substr(0, 15);
-        var mid = "...";
-        var end = value.substr(-trailingCharCount);
-
-        result = front + mid + end;
-    }
-    return result;
-}
-
-
 function displayImage(listele) {
 
     // Restting the Background Colours
@@ -69,11 +55,15 @@ function createList(item, index) {
     let image = document.createElement("img")
     image.src = item["previewImage"]
     let caption = document.createElement("p")
-    // caption.innerHTML = item["title"]
-    let finalText = item["title"].slice(-13)
-    caption.setAttribute('data-extension' , finalText)
-    caption.innerHTML = truncateTitle(item["title"] , 31 , 13)
 
+    let finalText = item["title"]
+    caption.classList.add("ImageCaption")
+    caption.setAttribute('data-extension' , finalText)
+    
+    //  CAPTION
+    let caption_length = finalText.length
+    caption.textContent = finalText
+    
     listElement.appendChild(image)
     listElement.appendChild(caption)
     
@@ -101,6 +91,28 @@ for (var i = 0; i < totalthumbnails; i++) {
     thumbnails[i].addEventListener('click', function(){displayImage(this)}, false);
 }
 
+// TRUNCATING THE CAPTIONS
+const truncateCaptions = () => {
+  document.querySelectorAll(".ImageCaption").forEach((item) => {
+    let caption = item.getAttribute("data-extension")
+    let caption_length = caption.length
+    item.textContent = caption
+    if (item.clientWidth < item.scrollWidth) {
+      let charwidth = Math.floor(item.scrollWidth/caption_length) // Width of a character
+      let totalChars = Math.floor(item.clientWidth/charwidth) // Total number of characters
+
+      totalChars = totalChars - 3 // Length of  Ellipsis to be subtracted
+      
+      let middlePos = totalChars/2-1 // Splitting the string into two parts
+
+      let front  = caption.slice(0, middlePos)
+      let last = caption.slice(caption_length - middlePos)
+      item.textContent = front + "..." + last
+    }
+});
+}
+
+truncateCaptions()
 // Adding Event Listener for Arrow Keys 
 
 window.addEventListener("keydown", function(event) {
