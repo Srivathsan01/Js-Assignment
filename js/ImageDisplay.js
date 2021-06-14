@@ -20,7 +20,6 @@ function resetColour() {
 function displayImage(listele) {
 
     // Restting the Background Colours
-    console.log(listele)
     
     resetColour();
 
@@ -134,7 +133,6 @@ window.addEventListener("keydown", function(event) {
     // Reset Colour
     resetColour()
     let  thumbnail = document.getElementById(currentSelected)
-    console.log("Errror " ,thumbnail)
     thumbnail.style.backgroundColor = "blue"
     thumbnail.getElementsByTagName('p')[0].style.color="white";
     // Change Background Colour of the Thumbnail pressed 
